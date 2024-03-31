@@ -1,0 +1,17 @@
+[33mcommit 3a6aa1cc4bb7947499400bc5865a481f6db37e16[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Siddhant Yugal Daryanani <siddhantdaryanani@gmail.com>
+Date:   Sun Mar 31 21:02:30 2024 +0530
+
+    added .env to gitignore
+
+[33mcommit 61d9ac6722410bb2d19218b97b7e8099b2f3b05b[m
+Author: Siddhant Yugal Daryanani <siddhantdaryanani@gmail.com>
+Date:   Sun Mar 31 20:54:38 2024 +0530
+
+    added some AI features and some simple front end changes
+
+[33mcommit 0ecd0b570b9bb4667b61a5f87629a88642632229[m
+Author: Siddhant Yugal Daryanani <siddhantdaryanani@gmail.com>
+Date:   Sun Mar 31 20:50:09 2024 +0530
+
+    added some AI features and some simple front end changes
