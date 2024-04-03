@@ -1,8 +1,21 @@
+"use client"
 import Image from "next/image";
 import desginer from "../../public/meditate-logo.png";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  
+  const [userEmail, setUserEmail] = useState("");
+  const user = localStorage.getItem("user");
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      const { email } = JSON.parse(user);
+      setUserEmail(email);
+    }
+  }, []);
+
   return (
     <section className="w-full pt-12 md:pt-24 lg:pt-32">
     <div className="container flex flex-col items-center space-y-4">
@@ -12,6 +25,7 @@ export default function Home() {
           <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
             Unlock Your Potential with AI-Powered Journaling
           </p>
+          {userEmail && <p>Logged in as: {user}</p>}
         </div>
         <div className="mt-6">
           <Link

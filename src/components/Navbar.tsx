@@ -1,8 +1,23 @@
+"use client"
 import Image from "next/image";
 import logo from "../../public/meditate-logo.png"
 import Link from "next/link";
-const Navbar = () => {
-    const navbarTextClass = `hover:scale-110 transition transform duration-200 ease-in-out px-3 py-2 rounded`
+import axios from "axios";
+import { useEffect, useState } from "react";
+import {useRouter} from "next/navigation";
+const Navbar =  () => {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await axios.get("/api/logout");
+      router.push("/");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  
+  const navbarTextClass = `hover:scale-110 transition transform duration-200 ease-in-out px-3 py-2 rounded`
     return (
         <nav className="bg-transparent text-[#5A5A5A] py-4 w-screen">
         <div className="container mx-auto flex justify-between items-center ">
@@ -18,8 +33,9 @@ const Navbar = () => {
   
           {/* Right Side Links */}
           <div className="flex space-x-4">
-            <Link href="/sign-in" className={navbarTextClass}>Login</Link>
-            <Link href="#" className={navbarTextClass}>Register</Link>
+            <Link href="/login" className={navbarTextClass}>Login</Link>
+            <Link href="#" className={navbarTextClass} onClick={handleLogout}>Logout</Link>
+            <Link href="/register" className={navbarTextClass}>Register</Link>
           </div>
         </div>
       </nav>

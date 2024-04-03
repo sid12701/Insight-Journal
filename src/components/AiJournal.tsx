@@ -39,8 +39,14 @@ const AiJournal: React.FC<AiJournalProps> = ({ setAi , onInsightAdd}) => {
             {aiJournalCompletion ? (
               <>
               <p>{aiJournalCompletion}</p>
-              <button onClick={() => onInsightAdd(aiJournalCompletion)}>Add</button>
-              <button onClick={() => setAi(false)}>Close</button>
+              <div className="flex flex-col sm:flex-row justify-between items-center px-4 py-3">
+                  <Button className="mx-auto mb-2 sm:mb-0" onClick={() => onInsightAdd(aiJournalCompletion)}>
+                    Add to insights
+                  </Button>
+                  <Button className="mx-auto" onClick={() => setAi(false)}>
+                    Close
+                  </Button>
+                </div>
               </>
             ) : (
               <form onSubmit={handleSubmit}>

@@ -20,6 +20,8 @@
     "clsx": "^2.1.0",
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
+    "jose": "^5.2.3",
+    "jsonwebtoken": "^9.0.2",
     "langchain": "^0.1.30",
     "lucide-react": "^0.363.0",
     "mongodb": "^6.5.0",
@@ -28,11 +30,14 @@
     "react": "^18",
     "react-day-picker": "^8.10.0",
     "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

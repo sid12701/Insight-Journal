@@ -98,10 +98,12 @@ const Page = () => {
           placeholder="Journal"
           className="border border-gray-300 rounded-md p-2 mt-2"
         />
-        <label htmlFor="insight">Journal</label>
+        <label htmlFor="insight">Insights</label>
         <textarea
           name="insight"
           placeholder="Insight"
+          value = {insight ? insight : ""}
+          onChange={(e) => setInsights(e.target.value)}
           className="border border-gray-300 rounded-md p-2 mt-2"
         />
         <Button className="gap-2" type="submit">
@@ -118,11 +120,7 @@ const Page = () => {
         </span>
     {ai ? (
       <AiJournal onInsightAdd={setInsights} setAi={setAi}/>
-        ) : null}
-
-        <div>
-          {insight}
-        </div>
+        ) : null}  
     </>
   );
 };
