@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import JournalCard from "@/components/JournalCard";
 import { formatDate } from "@/utilities/formatDate";
 import { truncateTo100Words } from "../../utilities/truncateTo100";
@@ -32,9 +32,13 @@ const Page = () => {
     setPosts(formattedPosts); 
   };
 
+  useEffect(() => {
+    getUserId();
+  }, []);
+
   return (
     <div>
-      <button onClick={getUserId}>Click</button>
+      {/* <button onClick={getUserId}>Click</button> */}
       {posts.map((post) => (
         <JournalCard
           key={post._id}
