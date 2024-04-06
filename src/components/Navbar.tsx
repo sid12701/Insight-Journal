@@ -3,8 +3,8 @@ import Image from "next/image";
 import logo from "../../public/meditate-logo.png"
 import Link from "next/link";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import {useRouter} from "next/navigation";
+import { ModeToggle } from "./ModeToggle";
 const Navbar =  () => {
   const router = useRouter();
 
@@ -36,6 +36,7 @@ const Navbar =  () => {
             <Link href="/login" className={navbarTextClass}>Login</Link>
             <Link href="#" className={navbarTextClass} onClick={handleLogout}>Logout</Link>
             <Link href="/register" className={navbarTextClass}>Register</Link>
+            <ModeToggle />
           </div>
         </div>
       </nav>

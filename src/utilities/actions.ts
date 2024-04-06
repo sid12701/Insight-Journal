@@ -3,12 +3,12 @@ import connectToDb from '../../src/utilities/db';
 import { signUpSchema } from './validation';
 import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
-import { User, Journal } from './models/userSchema';
 import { Ollama } from "@langchain/community/llms/ollama";
 import { ChatOllama } from "@langchain/community/chat_models/ollama";
 import {PromptTemplate } from "@langchain/core/prompts";
 import axios from 'axios';
-
+import Journal from "@/utilities/models/journalSchema";
+import Replicate from "replicate"
 
 
 const llm = new Ollama({
@@ -21,8 +21,6 @@ const chatModel = new ChatOllama({
     model: "llama2",
   });
   
-
-
 // export const register = async (data) => {
 //     try {
 //         await connectToDb();
@@ -133,6 +131,28 @@ export const aiJournal = async (journal)=>{
         const result = await chatModel.invoke(finalPrompt);
         const response = result.content;
         return response;
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
+
+
+export const findPost = async(id)=>{
+    try{
+        await connectToDb();
+        const journal = await Journal.findById(id)
+        const journalObject = journal.toObject();
+        return { 
+            ...journalObject, 
+            _id: journalObject._id.toString(), 
+            author: { 
+              ...journalObject.author, 
+              buffer: journalObject.author.buffer.toString(), 
+              date: new Date(journalObject.date).toISOString()
+            } 
+          };
     }
     catch(err){
         console.log(err)
