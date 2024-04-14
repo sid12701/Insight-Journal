@@ -19,7 +19,7 @@ interface Journal {
     __v?: number;
   }
 
-const JournalPage = ({params}) => {
+const JournalPage = ({params} : any) => {
     const [journal, setJournal] = useState<Journal>({});
     useEffect(() => {
         if (params && params.id) {
@@ -37,7 +37,6 @@ const JournalPage = ({params}) => {
     return(
         <div>
             <h1>Journal Page</h1>
-            <h2>{params.id}</h2>
             <h2>{journal.title}</h2>
             <p>{journal.journal}</p>
             <p>{dayjs(journal.date).format('MMM D, YYYY')}</p>

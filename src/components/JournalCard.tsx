@@ -11,7 +11,15 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 
-const JournalCard = ({title, journal,insight,date,id})=>{
+interface JournalCardProps {
+    title: string;
+    journal: string;
+    insight: string;
+    date: string;
+    id: string;
+}
+
+const JournalCard = ({title, journal,insight,date,id}: JournalCardProps )=>{
     const router = useRouter();
     return (
         <Card className="bg-black text-white">
@@ -31,3 +39,6 @@ const JournalCard = ({title, journal,insight,date,id})=>{
 
 
 export default JournalCard;
+
+
+

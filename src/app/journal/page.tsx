@@ -55,14 +55,14 @@ const JournalPage = () => {
     console.log(response.data);
   };
   
-  const insightOnchange = (e) => {
-    const newInsight = e.target.value;
-    setInsights(newInsight);
-    // // setJournal(prevJournal => ({
-    // //   ...prevJournal,
-    // //   insight: newInsight,
-    // // }));
-  };
+  // const insightOnchange = (e) => {
+  //   const newInsight = e.target.value;
+  //   setInsights(newInsight);
+  //   // // setJournal(prevJournal => ({
+  //   // //   ...prevJournal,
+  //   // //   insight: newInsight,
+  //   // // }));
+  // };
   return (
     <div>
       <>
@@ -156,3 +156,7 @@ const JournalPage = () => {
 };
 
 export default JournalPage;
+
+
+
+

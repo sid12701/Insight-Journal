@@ -45,8 +45,8 @@ const Page = () => {
           title={post.title}
           journal={post.journal}
           date={formatDate(post.date)}
-          insight={post.insight}
-          id={post._id}
+          insight={post.insight as string}
+          id={post._id} 
         />
       ))}
     </div>
