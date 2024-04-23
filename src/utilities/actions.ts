@@ -1,6 +1,5 @@
 "use server"
 import connectToDb from '../../src/utilities/db';
-import {PromptTemplate } from "@langchain/core/prompts";
 import axios from 'axios';
 import Journal from "@/utilities/models/journalSchema";
 

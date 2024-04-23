@@ -9,7 +9,6 @@ export async function GET( request: NextRequest ) {
     try{
         const userId = getDataFromToken(request)
         const user = await User.findById(userId).select("-password");
-        console.log(user);
         if(!user){
             return NextResponse.json({message:"User not found", success:false})
         }

@@ -5,8 +5,19 @@ import Link from "next/link";
 import axios from "axios";
 import {useRouter} from "next/navigation";
 import { ModeToggle } from "./ModeToggle";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
+
 const Navbar =  () => {
   const router = useRouter();
+  const [isClient, setIsClient] = useState(false);
+  // const token = Cookies.get("token")
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const token = isClient ? Cookies.get("token") : null;
 
   const handleLogout = async () => {
     try {
@@ -43,8 +54,11 @@ const Navbar =  () => {
   
           {/* Right Side Links */}
           <div className="flex space-x-4">
-            <Link href="/login" className={navbarTextClass}>Login</Link>
-            <Link href="#" className={navbarTextClass} onClick={handleLogout}>Logout</Link>
+          {!token ? (
+        <Link href="/login" className={navbarTextClass}>Login</Link>
+      ) : (
+        <Link href="#" className={navbarTextClass} onClick={handleLogout}>Logout</Link>
+      )}
             <Link href="/register" className={navbarTextClass}>Register</Link>
             <ModeToggle />
           </div>

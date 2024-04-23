@@ -5,8 +5,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { aiCloudflare } from "@/utilities/actions";
 import { Button } from "@/components/ui/button";
+import Cookies from "js-cookie";
 
 export default function Home() {
+  const cookies = Cookies.get()
+  console.log(cookies)
   return (
     <section className="w-full pt-12 md:pt-24 lg:pt-32">
     <div className="container flex flex-col items-center space-y-4">
