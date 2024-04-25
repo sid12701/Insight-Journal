@@ -9,13 +9,11 @@ connectToDb();
 export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
-    // console.log(reqBody)
     const {email, password} = reqBody;
     const newUser = {
         email,
         password
     }
-    console.log(newUser);
     const parsedData = signUpSchema.safeParse(newUser);
     if (!parsedData.success) {
       console.log(parsedData.error.errors[0].message);
@@ -29,7 +27,6 @@ export async function POST(request: NextRequest) {
     const hashedPassword = await bcrypt.hash(password, salt);
     const signUpUser = new User({ email, password:hashedPassword });
     const savedUser = await signUpUser.save();
-    console.log(savedUser);
     return NextResponse.json({message:"User Created Successfully", success:true, savedUser})
   } catch (err:any) {
     console.log(err);

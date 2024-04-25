@@ -5,7 +5,7 @@ import loginForm from "../../../../public/login-form.jpg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import toast from "react-hot-toast";
+import toast, { Toaster } from 'react-hot-toast';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -20,11 +20,13 @@ const LoginPage = () => {
     setLoading(true);
     try {
       const response = await axios.post("/api/login", user);
-      console.log("Registration success", response.data);
+      console.log(response)
+      if(response.data.success){
+        toast.success("Succesfully logged in")
+      }
       router.push("/");
     } catch (err:any) {
       console.error("Registration failed", err);
-      toast.error(err.message);
     } finally {
       setLoading(false);
     }

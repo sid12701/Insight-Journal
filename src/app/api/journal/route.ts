@@ -24,8 +24,6 @@ export async function POST(request: NextRequest){
     const user =  await User.findById(userFromToken.id);
     await user.posts.push(savedJournal._id);
     await user.save();
-    console.log(savedJournal._id)
-    console.log(user)
     return NextResponse.json({data: user.id});
 } 
 

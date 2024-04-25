@@ -1,19 +1,30 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { aiCloudflare} from "../utilities/actions";
-import React, { useState } from "react";
+import { aiCloudflare } from "../utilities/actions";
+import React, { useEffect, useState } from "react";
 import logo from "../../public/meditate-logo.png";
 import axios from "axios";
 
 interface AiJournalProps {
   setAi: React.Dispatch<React.SetStateAction<boolean>>;
   onInsightAdd: React.Dispatch<React.SetStateAction<string>>;
+  journalText: string;
 }
 
-const AiJournal: React.FC<AiJournalProps> = ({ setAi, onInsightAdd }) => {
+const AiJournal: React.FC<AiJournalProps> = ({
+  setAi,
+  onInsightAdd,
+  journalText,
+}) => {
   const [aiJournalEntry, setAiJournalEntry] = useState("");
-  const [aiJournalCompletion, setAiJournalCompletion] = useState<string | null>(null);
+  const [aiJournalCompletion, setAiJournalCompletion] = useState<string | null>(
+    null
+  );
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setAiJournalEntry(journalText); // Update the textarea when journalText changes
+  }, [journalText]);
 
   const handleJournalChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setAiJournalEntry(e.target.value);
@@ -25,7 +36,6 @@ const AiJournal: React.FC<AiJournalProps> = ({ setAi, onInsightAdd }) => {
       const response = await aiCloudflare(aiJournalEntry);
       if (response) {
         const aiCompletion = response.result.response;
-        console.log(aiCompletion);
         setAiJournalCompletion(aiCompletion);
       }
     } catch (error) {
@@ -36,13 +46,24 @@ const AiJournal: React.FC<AiJournalProps> = ({ setAi, onInsightAdd }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" id="my-modal">
+    <div
+      className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
+      id="my-modal"
+    >
       <div className="relative top-20 mx-auto p-5 border shadow-lg rounded-md bg-[#E0E0E0] w-full max-w-4xl">
         <div className="mt-3 text-center">
           <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-            <Image src={logo} alt="meditate" width="48" height="48" className="rounded-full" />
+            <Image
+              src={logo}
+              alt="meditate"
+              width="48"
+              height="48"
+              className="rounded-full"
+            />
           </div>
-          <h3 className="text-lg leading-6 font-medium text-gray-900">AI Insights</h3>
+          <h3 className="text-lg leading-6 font-medium text-gray-900">
+            AI Insights
+          </h3>
           <div className="mt-2 px-7 py-3">
             {aiJournalCompletion ? (
               <>
@@ -70,6 +91,12 @@ const AiJournal: React.FC<AiJournalProps> = ({ setAi, onInsightAdd }) => {
                   value={aiJournalEntry}
                 ></textarea>
                 <div className="flex flex-col sm:flex-row justify-between items-center px-4 py-3">
+                <Button
+                  onClick={() => setAiJournalEntry(journalText)}
+                  className="mt-2"
+                >
+                  Use Journal Text
+                </Button>
                   <Button
                     className="mx-auto mb-2 sm:mb-0"
                     onClick={handleSubmit}
