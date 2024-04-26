@@ -23,7 +23,7 @@ const AiJournal: React.FC<AiJournalProps> = ({
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setAiJournalEntry(journalText); // Update the textarea when journalText changes
+    setAiJournalEntry(journalText); 
   }, [journalText]);
 
   const handleJournalChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -43,6 +43,11 @@ const AiJournal: React.FC<AiJournalProps> = ({
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleAddInsight = () => {
+    onInsightAdd(aiJournalCompletion!);
+    setAi(false); 
   };
 
   return (
@@ -71,7 +76,7 @@ const AiJournal: React.FC<AiJournalProps> = ({
                 <div className="flex flex-col sm:flex-row justify-between items-center px-4 py-3">
                   <Button
                     className="mx-auto mb-2 sm:mb-0"
-                    onClick={() => onInsightAdd(aiJournalCompletion)}
+                    onClick={() => handleAddInsight()}
                   >
                     Add to insights
                   </Button>

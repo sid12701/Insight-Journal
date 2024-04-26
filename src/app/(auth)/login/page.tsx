@@ -30,7 +30,7 @@ const LoginPage = () => {
   };
 
   const onLogin = async () => {
-    if (!validateInput()) return; // Stop the login if validation fails
+    if (!validateInput()) return; 
     setLoading(true);
     try {
       const response = await axios.post("/api/login", user);
@@ -41,7 +41,7 @@ const LoginPage = () => {
       } else {
         toast.error(response.data.message || "Login failed");
       }
-    } catch (err) {
+    } catch (err:any) {
       console.error("Login failed", err);
       toast.error(err.response?.data.message || "Login failed");
     } finally {
