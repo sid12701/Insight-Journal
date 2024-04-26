@@ -15,26 +15,22 @@ const Navbar =  () => {
   const router = useRouter();
   const [token, setToken] = useState('');
 
+  useEffect(() => {
+    const fetchToken = () => {
+      const storedToken = Cookies.get("token");
+      setToken(storedToken!);
+    };
+
+    fetchToken();
+  }, [token]);
+
+
   // useEffect(() => {
-  //   const fetchToken = () => {
-  //     const storedToken = Cookies.get("token");
-  //     setToken(storedToken);
-  //   };
-
-  //   fetchToken();
-  // }, [token]);
-
-
-  useEffect(()=>{
-    const fetchUser = ()=>{
-      const userToken = Cookies.get("token")
-      if(userToken){
-        setToken(userToken)
-      }
-    }
-
-    fetchUser()
-  }, [token])
+  //   const userToken = Cookies.get("token");
+  //   if (userToken !== token) {
+  //     setToken(userToken);
+  //   }
+  // }, []);
   
 
   const handleLogout = async () => {

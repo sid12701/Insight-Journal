@@ -8,21 +8,29 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { CalendarIcon, Send } from "lucide-react";
-import { format, isValid, parse } from "date-fns";
+import { CalendarIcon, Send, NotebookPen } from "lucide-react";
+import { format } from "date-fns";
 import axios from "axios";
-
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 const JournalPage = () => {
   const [date, setDate] = React.useState<Date>();
   const [inputValue, setInputValue] = React.useState<string>("");
   const [insight, setInsights] = React.useState("");
   const [ai, setAi] = React.useState<boolean>(false);
+  const router = useRouter();
   const [journal, setJournal] = React.useState({
     title: "",
     journal: "",
     insight: "",
     date: new Date(),
   });
+
+  const token = Cookies.get("token");
+
+  if (!token) {
+    router.push("/login");
+  }
 
   React.useEffect(() => {
     if (date) {
@@ -117,23 +125,31 @@ const JournalPage = () => {
               className="mt-1 w-full border-gray-700 rounded-md shadow-sm p-2 h-40"
             />
           </div>
+          <div className="flex flex-col space-y-2">
+            <div
+              className="text-center text-base font-medium text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 cursor-pointer rounded-lg transition ease-in-out duration-200 px-5 py-2"
+              onClick={() => setAi(true)}
+            >
+              Use AI to generate Insights
+            </div>
 
-          <Button
-            type="submit"
-            onClick={handleJournal}
-            className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-          >
-            <Send />
-            Journal it
-          </Button>
+            <Button
+              type="submit"
+              onClick={handleJournal}
+              className="text-center inline-flex items-center gap-2 bg-amber-600 text-white px-4 py-2 rounded-md hover:bg-amber-700 hover:scale-110 transition-transform duration-200 ease-in-out"
+            >
+              <NotebookPen />
+              Journal it
+            </Button>
+          </div>
         </form>
 
-        <div
-          className="mt-4 text-sm text-cyan-600 cursor-pointer hover:underline"
+        {/* <div
+          className="mt-4 text-base text-indigo-700 cursor-pointer hover:underline hover: transition transform duration-200 ease-in-out"
           onClick={() => setAi(true)}
         >
           Use AI to generate Insights
-        </div>
+        </div> */}
 
         {ai && (
           <AiJournal
