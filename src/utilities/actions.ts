@@ -5,27 +5,11 @@ import Journal from "@/utilities/models/journalSchema";
 
 
 
-// export const aiJournal = async (journal : string)=>{
-//     try{
-//         const prompt = PromptTemplate.fromTemplate( process.env.AI_PROMPT + ": {journal}");
-//         const finalPrompt = await prompt.format({
-//             journal: journal
-//         })
-//         const result = await chatModel.invoke(finalPrompt);
-//         const response = result.content;
-//         return response;
-//     }
-//     catch(err){
-//         console.log(err)
-//     }
-// }
-
-
 
 export const aiCloudflare = async (journal: string) => {
     const apiUrl = "https://api.cloudflare.com/client/v4/accounts/a00c7ddc4e7892feccde514c721419bc/ai/run/@cf/meta-llama/llama-2-7b-chat-hf-lora";
     const prompt = process.env.AI_PROMPT + ": " + journal;
-    const aiBearerToken = "bq_YqEf9LsCjI_QphsQeUH8UO_vWTk4MOxXdNZ58"
+    const aiBearerToken = process.env.AI_BEARER_TOKEN;
     try {
         const result = await axios.post(apiUrl, {prompt: prompt}, {
             headers: {

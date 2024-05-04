@@ -6,10 +6,38 @@ import { Button } from "@/components/ui/button";
 import Cookies from "js-cookie";
 import Typewriter from 'typewriter-effect';
 import {useRouter} from "next/navigation"
+import { TypewriterEffect } from "@/components/ui/typewriter";
 
 export default function Home() {
   const router = useRouter();
   const token = Cookies.get("token");
+  const textClass = "text-gray-500 md:text-xl dark:text-gray-400 text-sm"
+  const words = [
+    {
+      text: "Unlock",
+      className: textClass
+    },
+    {
+      text: "Your",
+      className: textClass
+    },
+    {
+      text: "Potential",
+      className: textClass
+    },
+    {
+      text: "with",
+      className: textClass
+    },
+    {
+      text: "AI-Powered",
+      className: textClass
+    },
+    {
+      text: "Journalling",
+      className: textClass
+    }
+  ];
 
   const handleGetStartedClick = (e:any) => {
     e.preventDefault();
@@ -28,7 +56,7 @@ export default function Home() {
           <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl lg:text-6xl/none">
             Insight Journal
           </h1>
-          <Typewriter
+          {/* <Typewriter
   onInit={(typewriter) => {
     typewriter.typeString('<span class="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">Unlock Your Potential with AI-Powered Journalling</span>')
       .pauseFor(2500)
@@ -41,7 +69,8 @@ export default function Home() {
             autoStart: true,
             loop:true 
           }}
-/>
+/> */}
+<TypewriterEffect words={words} className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400 p-[-20px]" />
         </div>
         <div className="mt-6">
           <Link

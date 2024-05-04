@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import AiJournal from "@/components/AiJournal";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -13,6 +13,7 @@ import { format } from "date-fns";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+
 const JournalPage = () => {
   const [date, setDate] = React.useState<Date>();
   const [inputValue, setInputValue] = React.useState<string>("");
@@ -27,10 +28,11 @@ const JournalPage = () => {
   });
 
   const token = Cookies.get("token");
-
-  if (!token) {
-    router.push("/login");
-  }
+  useEffect(() => {
+    if (!token) {
+      router.push("/login");
+    }
+  }, [router]);
 
   React.useEffect(() => {
     if (date) {
@@ -42,7 +44,11 @@ const JournalPage = () => {
 
   const handleJournal = async () => {
     const updatedJournal = { ...journal, insight };
-    const response = await axios.post("/api/journal", updatedJournal);
+    const response = await axios.post("/api/journal", updatedJournal, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   };
 
   return (
