@@ -6,21 +6,16 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST (request:NextRequest){
     try{
-        const reqBody = await request.json();
-        const {journal} = reqBody;
-        const apiUrl = "https://api.cloudflare.com/client/v4/accounts/a00c7ddc4e7892feccde514c721419bc/ai/run/@cf/meta-llama/llama-2-7b-chat-hf-lora";
-        const prompt = process.env.AI_PROMPT + ": " + journal;
+        const req = await request.json();
+        const {journal} = req;
         const aiBearerToken = process.env.AI_BEARER_TOKEN;
-        try {
-            const result = await axios.post(apiUrl, {prompt: prompt}, {
-                headers: {
-                    Authorization: `Bearer ${aiBearerToken}`,
-                }
-            });
-            return NextResponse.json({data: result.data})
-        } catch (err) {
-            console.error(err);
-        }
+        const prompt = process.env.AI_PROMPT + ": " + journal
+        const response = await axios.post("https://api.cloudflare.com/client/v4/accounts/a00c7ddc4e7892feccde514c721419bc/ai/run/@cf/meta-llama/llama-2-7b-chat-hf-lora",{prompt: prompt},{
+            headers: {
+                Authorization: `Bearer ${aiBearerToken}`,
+            }
+        })
+        return NextResponse.json({data: response.data})
     }
     catch(err){
         console.log(err)
