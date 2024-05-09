@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "react-hot-toast";
-
+import {cn} from "../lib/utils"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

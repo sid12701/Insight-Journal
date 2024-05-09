@@ -8,7 +8,7 @@ connectToDb();
 
 export async function POST(request: NextRequest) {
     const req = await request.json();
-    const authHeaders = req.headers.get("Authorization");
+    const authHeaders = request.headers.get("Authorization");
     if (!authHeaders) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }

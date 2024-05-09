@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from 'react-hot-toast';
 import { loginSchema } from "@/utilities/validation"; // Adjust the path as necessary
+import Link from "next/link";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -95,6 +96,8 @@ const LoginPage = () => {
                   />
                   {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
                 </div>
+
+                <Link href="/register" className="text-blue-500">Dont have an account?</Link>
 
                 <button
                   type="submit"

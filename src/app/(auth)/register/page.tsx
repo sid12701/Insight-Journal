@@ -121,6 +121,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { signUpSchema } from "@/utilities/validation";
+import Link from "next/link";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -223,6 +224,7 @@ const RegisterPage = () => {
                     <p className="text-red-500 text-sm">{errors.password}</p>
                   )}
                 </div>
+                <Link href="/login" className="text-blue-500">Already have an account?</Link>
 
                 <button
                   type="submit"
