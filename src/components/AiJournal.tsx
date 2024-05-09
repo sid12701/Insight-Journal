@@ -33,9 +33,14 @@ const AiJournal: React.FC<AiJournalProps> = ({
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
-      const response = await aiCloudflare(aiJournalEntry);
-      if (response) {
-        const aiCompletion = response.result.response;
+      // const response = await aiCloudflare(aiJournalEntry);
+      // if (response) {
+      //   const aiCompletion = response.result.response;
+      //   setAiJournalCompletion(aiCompletion);
+      // }
+      const response = await axios.post("/api/aiInsight", { journal: aiJournalEntry });
+      if (response.data) {
+        const aiCompletion = response.data.data.result.response;
         setAiJournalCompletion(aiCompletion);
       }
     } catch (error) {
